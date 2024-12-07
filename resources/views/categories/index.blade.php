@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,35 @@
     <title>All Categories</title>
     @vite('resources/css/index.css')
 </head>
+
 <body>
 
-    <header>
-        <h1><a href="{{ route('categories.create') }}">Create Category</a></h1>
-    </header>
+    <!-- Navigation bar -->
+    <nav>
+        <div class="left-nav">
+            <a class="nav-text" href="{{ route('categories.index') }}">Manage Categories</a>
+            <a class="nav-text" href="{{ route('products.index') }}">Manage Products</a>
+        </div>
+        <div class="right-nav">
+            <form method="POST" action="{{ route('admin.logout') }}">
+                @csrf
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+    </nav>
 
+    <!-- Create Category button -->
+    <div class="create-button">
+        <a href="{{ route('categories.create') }}" class="create-btn">Create New Category</a>
+    </div>
+
+    <!-- Categories Table -->
     <div class="container">
         <table>
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Image</th>       
+                    <th>Image</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -27,18 +45,18 @@
                     <tr>
                         <td>{{ $category->name }}</td>
                         <td>
-                            <!-- Check if the category has an image -->
                             @if($category->image)
-                                <img src="{{ asset('upload/categories/'.$category->image) }}" alt="{{ $category->name }}" width="100"> <!-- Display the image -->
+                                <img src="{{ asset('upload/categories/' . $category->image) }}" alt="{{ $category->name }}"
+                                    width="100">
                             @else
                                 No Image Available
                             @endif
                         </td>
                         <td class="actions">
                             <a href="{{ route('categories.edit', $category) }}">Edit</a>
-                            <a href="{{ route('categories.show', $category->id) }}">View</a>
 
-                            <form method="POST" action="{{ route('categories.destroy', $category) }}" style="display:inline-block;">
+                            <form method="POST" action="{{ route('categories.destroy', $category) }}"
+                                style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="delete-btn">Delete</button>
@@ -51,4 +69,5 @@
     </div>
 
 </body>
+
 </html>

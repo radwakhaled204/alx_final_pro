@@ -20,12 +20,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('admin')->middleware('guest:admin')->group(function () {
-    Route::get('login', [LoginController::class, 'create'])->name('admin.login');
-    Route::post('login', [LoginController::class, 'store']);
-
-});
-
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin-auth.php';
 
