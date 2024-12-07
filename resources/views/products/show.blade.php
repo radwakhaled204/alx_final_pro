@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $product->name }} - Product Details</title>
-    @vite('resources/css/details.css')
-
-    <!-- <link rel="stylesheet" href="{{ asset('css/styles.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('css/details.css') }}">
 </head>
 
 <body>

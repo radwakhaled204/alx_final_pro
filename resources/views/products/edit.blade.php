@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Edit Product</title>
-    @vite('resources/css/createproduct.css')
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ asset('css/createproduct.css') }}">
 </head>
 
 <body>
@@ -15,7 +14,7 @@
         $categories = App\Models\Category::all();
     @endphp
     <div class="container">
-    <h1>Edit Product: {{ $product->name }}</h1>
+        <h1>Edit Product: {{ $product->name }}</h1>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -27,21 +26,23 @@
             </div>
         @endif
 
-        <form method="post" action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data" class="form">
+        <form method="post" action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data"
+            class="form">
             @csrf
             @method('PUT')
-                <div class="form-group">
-                    <label for="image">Product Image:</label>
-                    <!-- Display current image if it exists -->
-                    @if($product->product_image)
-                        <div class="current-image">
-                            <img src="{{ asset('upload/products/'.$product->product_image) }}" alt="{{ $product->name }}" width="150">
-                        </div>
-                    @else
-                        <p>No image available</p>
-                    @endif
-                    <input type="file" name="image[]" id="image" multiple accept="image/*" required>
-                </div>
+            <div class="form-group">
+                <label for="image">Product Image:</label>
+                <!-- Display current image if it exists -->
+                @if($product->product_image)
+                    <div class="current-image">
+                        <img src="{{ asset('upload/products/' . $product->product_image) }}" alt="{{ $product->name }}"
+                            width="150">
+                    </div>
+                @else
+                    <p>No image available</p>
+                @endif
+                <input type="file" name="image[]" id="image" multiple accept="image/*" required>
+            </div>
 
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -62,11 +63,12 @@
                 <label for="category">Category:</label>
                 <select name="category" id="category" required>
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
+                        <option value="{{ $category->id }}" {{ $category->id == $product->category_id ? 'selected' : '' }}>
+                            {{ $category->name }}</option>
                     @endforeach
                 </select>
             </div>
-            
+
             <button type="submit" class="btn-submit">Update</button>
         </form>
     </div>

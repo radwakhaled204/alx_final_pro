@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Show Category</title>
-    @vite('resources/css/index.css') <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 </head>
+
 <body>
 
     <header>
@@ -28,7 +30,7 @@
             <!-- Check if the category has an image and display it -->
             @if($category->image)
                 <div class="category-image">
-                    <img src="{{ asset('upload/categories/'.$category->image) }}" alt="{{ $category->name }}" width="200">
+                    <img src="{{ asset('upload/categories/' . $category->image) }}" alt="{{ $category->name }}" width="200">
                 </div>
             @else
                 <p>No image available for this category.</p>
@@ -37,7 +39,8 @@
             <!-- You can add more details if necessary -->
             <div class="category-actions">
                 <a href="{{ route('categories.edit', $category->id) }}">Edit</a>
-                <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline-block;">
+                <form action="{{ route('categories.destroy', $category->id) }}" method="POST"
+                    style="display:inline-block;">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="delete-btn">Delete</button>
@@ -47,4 +50,5 @@
     </div>
 
 </body>
+
 </html>
