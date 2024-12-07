@@ -1,0 +1,65 @@
+Projects Requirements
+There are two users only admin and customer
+............................................................................
+Admin (login only)
+In the admin dashboard
+create, update, delete category
+view all categories
+create, update, delete product
+view all products
+
+-------------------------------
+Customer (Register & login)
+
+have a cart
+can add items to the cart
+can view items in the cart
+can edit items quantity
+can delete item from the cart
+then the customer can order (after the order is complete the products quantities must change)
+
+-----------------
+Project Models the Database Tables:
+
+Image:
+* product-id (FK)
+* image-path
+
+Category:
+* name
+* image
+
+Product:
+* name
+* description
+* quantity
+* price
+* category-id (Fk)
+
+Customer:
+* username
+* email
+* password
+* phone
+* address
+
+Admin:
+* email
+* password
+
+
+Cart:
+* customer-id (FK)
+* total-quantity
+* total-price
+
+
+Cart-Item:
+* cart-id (Fk)
+* product-id (Fk)
+* quantity-to-purchase
+* price
+* total-item-price
+
+
+

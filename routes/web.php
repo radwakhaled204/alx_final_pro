@@ -1,24 +1,18 @@
 <?php
-use App\Http\Controllers\CategoryController;
+
+use App\Http\Controllers\Admin\Auth\LoginController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::resource('categories', CategoryController::class);
-Route::resource('products', ProductController::class);
+Route::get('/', [ProductController::class, 'welcome'])->name('products.welcome');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth:admin', 'verified'])->name('admin.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -26,5 +20,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::prefix('admin')->middleware('guest:admin')->group(function () {
+    Route::get('login', [LoginController::class, 'create'])->name('admin.login');
+    Route::post('login', [LoginController::class, 'store']);
+
+});
+
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin-auth.php';
+

@@ -5,40 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>All Products</title>
+    @vite('resources/css/index.css')
 </head>
 <body>
-    <h1><a href="{{route('products.create')}}">Create Product</a></h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Category</th>
-                <th>Actions</th>
+    <header>
+        <h1><a href="{{ route('products.create') }}">Create Product</a></h1>
+    </header>
 
-            </tr>
-        </thead>
-        @foreach ($products as $product )
+    <div class="container">
+        <table>
             <thead>
                 <tr>
-                    <td>{{$product->name}}</td>
-                    <td>{{$product->description}}</td>
-                    <td>{{$product->price}}</td>
-                    <td>{{$product->category->name}}</td>
-                    <td><a href="{{route('products.edit',$product)}}">Edit</a>
-                        <form method="POST" action="{{route('products.destroy',$product)}}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete</button>
-                        </form>
-                    </td>
-
+                    <th>Images</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
-        @endforeach
-        
-    </table>
+            <tbody>
+                @foreach ($products as $product)
+                    <tr>
+                        <!-- Display product images -->
+                        <td>
+                            @forelse($product->images as $image)
+                                <img src="{{ asset('upload/products/'.$image->image_name) }}" alt="{{ $product->name }}" width="100" style="margin-right: 5px;">
+                            @empty
+                                No Images Available
+                            @endforelse
+                        </td>
+                        <td>{{ $product->name }}</td>
+                        <td>{{ $product->description }}</td>
+                        <td>{{ $product->price }}</td>
+                        <td>{{ $product->category->name }}</td>
+                        <td class="actions">
+                            <a href="{{ route('products.edit', $product->id) }}">Edit</a>
+                            <form method="POST" action="{{ route('products.destroy', $product) }}" style="display:inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="delete-btn">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
 </body>
 </html>
