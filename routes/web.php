@@ -4,10 +4,16 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CartController;
 
+use App\Http\Controllers\CartItemsController;
+
+Route::resource('cart', CartController::class);
+Route::resource('cart-items', CartItemsController::class);
 
 Route::get('/', [ProductController::class, 'welcome'])->name('products.welcome');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+
 
 
 Route::get('/dashboard', function () {
@@ -19,6 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/admin-auth.php';

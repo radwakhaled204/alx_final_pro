@@ -1,5 +1,5 @@
 <?php
-
+#CartItem Model By Radwa Khaled 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -7,19 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class CartItem extends Model
 {
     protected $fillable = [
-         
+        'cart_id',
         'product_id', 
         'quantity_to_purchase',
-         'price', 
-         'total_item_price'
-        ];
+        'price', 
+        'total_item_price'
+    ];
 
     public function cart()
     {
         return $this->belongsTo(Cart::class);
     }
 
-    public function product()
+    public function product() 
     {
         return $this->belongsTo(Product::class);
     }
