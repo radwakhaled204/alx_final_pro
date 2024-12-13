@@ -22,6 +22,7 @@
             <div class="auth-buttons">
                 <div style="padding: 10px">{{ Auth::user()->name }}</div>
                 <div style="padding: 10px">{{ Auth::user()->id }}</div>
+                <button onclick="location.href='{{ route('cart.index') }}'">View Cart</button>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit">Logout</button>
@@ -48,13 +49,20 @@
             <p class="product-price">${{ number_format($product->price, 2) }}</p>
         @endif
 
-        <form action="{{ route('cart-items.store') }}" method="POST">
-    @csrf
-    <input type="hidden" name="product_id" value="{{ $product->id }}">
-    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-    <input type="number" name="quantity_to_purchase" value="1" min="1" required>
-    <button type="submit" class="add-to-cart-button">Add to Cart</button>
-</form>
+        @if(Auth::check())
+    <form action="{{ route('cart-items.store') }}" method="POST" style="display: inline;">
+        @csrf
+        <input type="hidden" name="product_id" value="{{ $product->id }}">
+        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+        <input type="number" name="quantity_to_purchase" value="1" min="1" required>
+        <button type="submit" class="add-to-cart-button">Add to Cart</button>
+    </form>
+  
+@else
+    <button onclick="location.href='{{ route('login') }}'" class="add-to-cart-button">Add to Cart</a>
+@endif
+
+
 
 
     </div>

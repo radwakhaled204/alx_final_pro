@@ -32,7 +32,7 @@ class CartItemsController extends Controller
         
         app(CartController::class)->updateCartTotals($cart->id);
     
-        return redirect()->route('cart.index')->with('success', 'Item added to cart successfully!');
+        return redirect()->back()->with('success', 'Item added to cart successfully!');
     }
     
     
