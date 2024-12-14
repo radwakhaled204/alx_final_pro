@@ -7,18 +7,30 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemsController;
 
+Route::get('/', [CartController::class, 'welcome'])->name('products.welcome');
 // Routes for Cart and Cart Items
 Route::resource('cart', CartController::class);
 Route::resource('cart-items', CartItemsController::class);
+
+// Confirm order route (GET request)
+Route::get('/confirm-order', [CartController::class, 'confirmOrder'])->name('confirm.order');
+
+// Place order route (POST request)
+Route::post('/place-order', [CartController::class, 'placeOrder'])->name('order.place');
+
 
 // Route for homepage and product details
 Route::get('/', [ProductController::class, 'welcome'])->name('products.welcome');
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
+
 // Store cart items (protected by auth middleware)
 Route::post('/cart-items/store', [CartItemsController::class, 'store'])
     ->middleware('auth')
     ->name('cart-items.store');
+
+
+
 
 // Dashboard (protected by auth and verified middleware)
 Route::get('/dashboard', function () {

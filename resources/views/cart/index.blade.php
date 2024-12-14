@@ -36,8 +36,12 @@
                         </form>
                     </li>
                 @endforeach
+                
             </ul>
         </div>
+        <form action="{{ route('confirm.order') }}" method="GET">
+    <button type="submit">Confirm and Order</button>
+</form>        
     @endforeach
 
 </body>

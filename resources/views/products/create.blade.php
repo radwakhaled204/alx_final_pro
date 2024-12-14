@@ -50,6 +50,11 @@
             </div>
 
             <div class="form-group">
+                <label for="inventory">Inventory:</label>
+                <input name="inventory" id="inventory" type="number" min="0" required>
+            </div>
+            
+            <div class="form-group">
                 <label for="category">Category:</label>
                 <select name="category" id="category" required>
                     @foreach ($categories as $category)

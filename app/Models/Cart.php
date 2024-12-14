@@ -10,13 +10,16 @@ class Cart extends Model
     protected $fillable = [
         'user_id', 
         'total_quantity',
-        'total_price'
+        'total_price',
+        'is_processed',
+        
     ];
     
-    public function items() 
+    public function items()
     {
         return $this->hasMany(CartItem::class);
     }
+    
 
     public function user()
     {

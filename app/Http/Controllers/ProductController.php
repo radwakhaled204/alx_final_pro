@@ -22,7 +22,8 @@ class ProductController extends Controller
 
     public function welcome()
     {
-        $products = Product::with('images')->get(); // Eager load images
+        $products = Product::with('images')->where('inventory', '>', 0)->get(); // جلب المنتجات ذات المخزون الأكبر من 0 فقط
+
         return view('welcome', compact('products'));
     }
 
@@ -43,7 +44,8 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
-            'price' => 'required'
+            'price' => 'required',
+            'inventory' => 'required|integer|min:0'
         ]);
 
         // Create the product
@@ -51,7 +53,8 @@ class ProductController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
-            'category_id' => $request->category
+            'category_id' => $request->category,
+            'inventory' => $request->inventory
         ]);
 
         // Handle multiple image uploads
@@ -110,12 +113,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'inventory' => 'required|integer|min:0', 
+        ]);
         $product = Product::find($id);
         $product->update([
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
-            'category_id' => $request->category
+            'category_id' => $request->category,
+            'inventory' => $request->inventory
         ]);
         return redirect()->route('products.index');
 

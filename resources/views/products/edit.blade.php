@@ -58,6 +58,11 @@
                 <label for="price">Price:</label>
                 <input name="price" id="price" type="number" step="0.01" value="{{ $product->price }}" required>
             </div>
+            
+            <div class="form-group">
+                  <label for="inventory">Inventory:</label>
+                 <input name="inventory" id="inventory" type="number" min="0" required>
+            </div>
 
             <div class="form-group">
                 <label for="category">Category:</label>

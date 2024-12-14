@@ -17,19 +17,36 @@ class CartItemsController extends Controller
             ['total_quantity' => 0, 'total_price' => 0]
         );
     
-        
+       
         $product = Product::find($request->product_id);
     
-        
-        $cartItem = CartItem::create([
-            'cart_id' => $cart->id,
-            'product_id' => $product->id,
-            'quantity_to_purchase' => $request->quantity_to_purchase,
-            'price' => $product->price,
-            'total_item_price' => $product->price * $request->quantity_to_purchase,
-        ]);
+        if (!$product) {
+            return redirect()->back()->with('error', 'Product not found!');
+        }
     
-        
+       
+        $cartItem = CartItem::where('cart_id', $cart->id)
+                            ->where('product_id', $product->id)
+                            ->first();
+    
+        if ($cartItem) {
+            
+            $cartItem->update([
+                'quantity_to_purchase' => $cartItem->quantity_to_purchase + $request->quantity_to_purchase,
+                'total_item_price' => ($cartItem->quantity_to_purchase + $request->quantity_to_purchase) * $product->price,
+            ]);
+        } else {
+           
+            CartItem::create([
+                'cart_id' => $cart->id,
+                'product_id' => $product->id,
+                'quantity_to_purchase' => $request->quantity_to_purchase,
+                'price' => $product->price,
+                'total_item_price' => $product->price * $request->quantity_to_purchase,
+            ]);
+        }
+    
+       
         app(CartController::class)->updateCartTotals($cart->id);
     
         return redirect()->back()->with('success', 'Item added to cart successfully!');

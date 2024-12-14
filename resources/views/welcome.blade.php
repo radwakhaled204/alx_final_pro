@@ -35,38 +35,36 @@
         <h1>Our Products</h1>
         <div class="product-list">
         @foreach ($products as $product)
-    <div class="product-card">
-        <a href="{{ route('products.show', $product->id) }}" class="product-link">
-            @if ($product->images->isNotEmpty())
-                <img src="{{ asset('upload/products/' . $product->images->first()->image_name) }}" alt="{{ $product->name }}" class="product-image" />
-            @else
-                <img src="{{ asset('upload/products/default.png') }}" alt="Default Image" class="product-image" />
+    @if ($product->inventory > 0)
+        <div class="product-card">
+            <a href="{{ route('products.show', $product->id) }}" class="product-link">
+                @if ($product->images->isNotEmpty())
+                    <img src="{{ asset('upload/products/' . $product->images->first()->image_name) }}" alt="{{ $product->name }}" class="product-image" />
+                @else
+                    <img src="{{ asset('upload/products/default.png') }}" alt="Default Image" class="product-image" />
+                @endif
+                <h2>{{ $product->name }}</h2>
+            </a>
+
+            @if ($product->price)
+                <p class="product-price">${{ number_format($product->price, 2) }}</p>
             @endif
-            <h2>{{ $product->name }}</h2>
-        </a>
 
-        @if ($product->price)
-            <p class="product-price">${{ number_format($product->price, 2) }}</p>
-        @endif
-
-        @if(Auth::check())
-    <form action="{{ route('cart-items.store') }}" method="POST" style="display: inline;">
-        @csrf
-        <input type="hidden" name="product_id" value="{{ $product->id }}">
-        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-        <input type="number" name="quantity_to_purchase" value="1" min="1" required>
-        <button type="submit" class="add-to-cart-button">Add to Cart</button>
-    </form>
-  
-@else
-    <button onclick="location.href='{{ route('login') }}'" class="add-to-cart-button">Add to Cart</a>
-@endif
-
-
-
-
-    </div>
+            @if(Auth::check())
+                <form action="{{ route('cart-items.store') }}" method="POST" style="display: inline;">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                    <input type="number" name="quantity_to_purchase" value="1" min="1" required>
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
+                </form>
+            @else
+                <button onclick="location.href='{{ route('login') }}'" class="add-to-cart-button">Add to Cart</button>
+            @endif
+        </div>
+    @endif
 @endforeach
+
 
 
         </div>
