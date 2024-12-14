@@ -29,9 +29,6 @@ Route::post('/cart-items/store', [CartItemsController::class, 'store'])
     ->middleware('auth')
     ->name('cart-items.store');
 
-
-
-
 // Dashboard (protected by auth and verified middleware)
 Route::get('/dashboard', function () {
     return view('dashboard');

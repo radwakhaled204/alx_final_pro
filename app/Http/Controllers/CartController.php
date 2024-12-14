@@ -41,22 +41,22 @@ class CartController extends Controller
     }
     public function confirmOrder()
     {
-        // الحصول على تفاصيل سلة التسوق الخاصة بالمستخدم
+        
         $cart = Cart::with('items.product')->where('user_id', auth()->id())->first();
     
         if (!$cart) {
             return redirect()->route('cart.index')->with('error', 'No cart found!');
         }
     
-        // حساب السعر الإجمالي
+        // calculate total price
         $totalPrice = $cart->items->sum(function ($item) {
             return $item->quantity_to_purchase * $item->product->price;
         });
     
-        // تفاصيل المستخدم
+       
         $user = Auth::user();
     
-        // عرض صفحة التأكيد
+       
         return view('order.confirm', compact('cart', 'totalPrice', 'user'));
     }
 
@@ -64,32 +64,32 @@ class CartController extends Controller
 
     public function placeOrder(Request $request)
     {
-        // Get the user's cart
+        
         $cart = Cart::with('items.product')->where('user_id', auth()->id())->first();
     
         if (!$cart) {
             return redirect()->route('cart.index')->with('error', 'No cart found!');
         }
     
-        // Ensure the order has not been processed already
+        // check if is_processed = 0
         if ($cart->is_processed) {
             $products = Product::with('images')->get();
             return view('welcome', compact('products'));
         }
     
-        // Process the order by deducting inventory quantities
+        //  deducting inventory quantities
         foreach ($cart->items as $item) {
             $product = $item->product;
             $product->inventory -= $item->quantity_to_purchase;
             $product->save();
         }
     
-        // Update cart status to "processed"
+      
         $cart->is_processed = true;
-        $cart->delete(); // Delete the cart once processed
-        $cart->items()->delete(); // Delete the cart items as well
-    
-        // Fetch all products to display on the welcome page
+        $cart->delete(); // Delete the cart 
+        $cart->items()->delete(); // Delete the cart items 
+
+        // Redirect to welcome
         $products = Product::with('images')->get();
         return redirect()->route('products.welcome')->with('success', 'Order placed successfully!');
 

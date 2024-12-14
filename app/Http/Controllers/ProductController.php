@@ -22,7 +22,8 @@ class ProductController extends Controller
 
     public function welcome()
     {
-        $products = Product::with('images')->where('inventory', '>', 0)->get(); // جلب المنتجات ذات المخزون الأكبر من 0 فقط
+        // get product if its inventory > 0
+        $products = Product::with('images')->where('inventory', '>', 0)->get(); 
 
         return view('welcome', compact('products'));
     }

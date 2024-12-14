@@ -21,7 +21,7 @@
         @auth
             <div class="auth-buttons">
                 <div style="padding: 10px">{{ Auth::user()->name }}</div>
-                <div style="padding: 10px">{{ Auth::user()->id }}</div>
+               <!-- <div style="padding: 10px">{{ Auth::user()->id }}</div>----debug--> 
                 <button onclick="location.href='{{ route('cart.index') }}'">View Cart</button>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

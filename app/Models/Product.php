@@ -12,7 +12,7 @@ class Product extends Model
         'description',
         'price',
         'category_id',
-        'inventory'
+        'inventory'//add inventory column
     ];
 
     public function category(){

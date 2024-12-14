@@ -10,13 +10,13 @@
 </head>
 <body>
 
-    <h1>All Carts</h1>
+    <h1>All Items in The Cart</h1>
     @foreach ($cart as $cart)
         <div>
-            <h2>Cart ID: {{ $cart->id }}</h2>
-            <p>Total Quantity: {{ $cart->total_quantity }}</p>
-            <p>Total Price: {{ $cart->total_price }}</p>
-            <h3>Items:</h3>
+          <!--  <h2>Cart ID: {{ $cart->id }}</h2>-->
+            <!--<p>Total Quantity: {{ $cart->total_quantity }}</p>-->
+            <!--<p>Total Price: {{ $cart->total_price }}</p>-->
+            <h2>Items:</h2>
             <ul>
                 @foreach ($cart->items as $item)
                     <li>
@@ -40,7 +40,7 @@
             </ul>
         </div>
         <form action="{{ route('confirm.order') }}" method="GET">
-    <button type="submit">Confirm and Order</button>
+    <button type="submit">Confirm </button>
 </form>        
     @endforeach
 

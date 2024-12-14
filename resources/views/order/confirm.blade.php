@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--order by Radwa Khaled-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,11 +20,13 @@
                 Product Name: {{ $item->product->name }}<br>
                 Quantity: {{ $item->quantity_to_purchase }}<br>
                 Price: {{ $item->product->price }}<br>
+              
                 Total Price: {{ $item->quantity_to_purchase * $item->product->price }}
+              
             </li>
         @endforeach
     </ul>
-
+    <h3> Total Quantity: {{ $cart->total_quantity }}</h3>
     <h3>Total Price: {{ $totalPrice }}</h3>
 
     <form action="{{ route('order.place') }}" method="POST">
