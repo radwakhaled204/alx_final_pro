@@ -14,7 +14,7 @@ class OrderController extends Controller
     {
         $orders = Order::with('user', 'orderItems.product')->get();
 
-        return view('admin.orders.index', compact('orders'));
+        return view('order.index', compact('orders'));
     }
 
     //Show orders for the authenticated user
@@ -88,6 +88,6 @@ class OrderController extends Controller
         // Delete the order
         $order->delete();
 
-        return redirect()->route('admin.orders.index')->with('success', 'Order deleted successfully!');
+        return redirect()->route('order.index')->with('success', 'Order deleted successfully!');
     }
 }

@@ -182,56 +182,11 @@
     </div>
   </section>
 
-  <section id="categories">
-    <div class="container my-3 py-5">
-      <div class="row my-5">
-        <div class="col text-center">
-          <a href="#" class="categories-item">
-            <iconify-icon class="category-icon" icon="ph:bowl-food"></iconify-icon>
-            <h5>Foodies</h5>
-          </a>
-        </div>
-        <div class="col text-center">
-          <a href="#" class="categories-item">
-            <iconify-icon class="category-icon" icon="ph:bird"></iconify-icon>
-            <h5>Bird Shop</h5>
-          </a>
-        </div>
-        <div class="col text-center">
-          <a href="#" class="categories-item">
-            <iconify-icon class="category-icon" icon="ph:dog"></iconify-icon>
-            <h5>Dog Shop</h5>
-          </a>
-        </div>
-        <div class="col text-center">
-          <a href="#" class="categories-item">
-            <iconify-icon class="category-icon" icon="ph:fish"></iconify-icon>
-            <h5>Fish Shop</h5>
-          </a>
-        </div>
-        <div class="col text-center">
-          <a href="#" class="categories-item">
-            <iconify-icon class="category-icon" icon="ph:cat"></iconify-icon>
-            <h5>Cat Shop</h5>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="foodies" class="my-5">
     <div class="container my-5 py-5">
 
       <div class="section-header d-md-flex justify-content-between align-items-center">
-        <h2 class="display-3 fw-normal">Pet Foodies</h2>
-        <div class="mb-4 mb-md-0">
-          <p class="m-0">
-            <button class="filter-button me-4  active" data-filter="*">ALL</button>
-            <button class="filter-button me-4 " data-filter=".cat">CAT</button>
-            <button class="filter-button me-4 " data-filter=".dog">DOG</button>
-            <button class="filter-button me-4 " data-filter=".bird">BIRD</button>
-          </p>
-        </div>
+        <h2 class="display-3 fw-normal">Best selling products</h2>
       </div>
 
       <div class="isotope-container row">

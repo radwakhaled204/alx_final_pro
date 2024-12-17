@@ -2,11 +2,15 @@
 #CartController By Radwa Khaled 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\Order_items;
+
 class CartController extends Controller
 {
     // public function index()
@@ -107,8 +111,22 @@ class CartController extends Controller
             $product->inventory -= $item->quantity_to_purchase;
             $product->save();
         }
-    
-      
+        $totalPrice = 100;
+        Log::info($totalPrice);
+        $order = Order::create([
+            'user_id' => $cart->user_id,
+            'total_item_price' => $cart->total_price,
+        ]);
+        foreach ($cart->items as $item) {
+            $order_item = Order_items::create([
+                'order_id'=> $order->id,
+                'product_id'=> $item->product->id,
+                'quantity_to_purchase'=> $item->quantity_to_purchase,
+                'price' => $item->product->price,
+                'total_item_price' => $item->product->price * $item->quantity_to_purchase,
+            ]);
+        }
+        
         $cart->is_processed = true;
         $cart->delete(); // Delete the cart 
         $cart->items()->delete(); // Delete the cart items 

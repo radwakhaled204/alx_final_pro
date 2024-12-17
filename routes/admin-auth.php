@@ -26,7 +26,7 @@ Route::prefix('admin')->middleware([AdminAuth::class])->group(function () {
 
     Route::post('logout', [LoginController::class, 'destroy'])->name('admin.logout');
     
-    Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+    Route::get('/order', [OrderController::class, 'index'])->name('order.index');
     Route::delete('/orders/{id}', [OrderController::class, 'destroy'])->name('admin.orders.destroy');
     
 });

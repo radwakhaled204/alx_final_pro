@@ -16,6 +16,7 @@
         <div class="left-nav">
             <a class="nav-text" href="{{ route('categories.index') }}">Manage Categories</a>
             <a class="nav-text" href="{{ route('products.index') }}">Manage Products</a>
+            <a class="nav-text" href="{{ route('order.index') }}">Manage Orders</a>
         </div>
         <div class="right-nav">
             <form method="POST" action="{{ route('admin.logout') }}">
