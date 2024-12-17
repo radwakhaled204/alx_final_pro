@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('cart', function (Blueprint $table) {
-            if (!Schema::hasColumn('cart', 'is_processed')) {
-                $table->boolean('is_processed')->default(false);
-            }
+        Schema::create('orders', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->decimal('total_item_price', 10, 2);
+            $table->timestamps();
         });
     }
 
@@ -23,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('cart', function (Blueprint $table) {
-            $table->dropColumn('is_processed');
-        });
+        Schema::dropIfExists('orders');
     }
 };

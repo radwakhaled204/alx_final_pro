@@ -5,6 +5,8 @@ use App\Http\Middleware\AdminAuth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
+
 
 
 Route::prefix('admin')->middleware('guest:admin')->group(function () {
@@ -23,5 +25,9 @@ Route::prefix('admin')->middleware([AdminAuth::class])->group(function () {
     Route::resource('products', ProductController::class)->except('show', 'welcome');
 
     Route::post('logout', [LoginController::class, 'destroy'])->name('admin.logout');
+    
+    Route::get('/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+    Route::delete('/orders/{id}', [OrderController::class, 'destroy'])->name('admin.orders.destroy');
+    
 });
 

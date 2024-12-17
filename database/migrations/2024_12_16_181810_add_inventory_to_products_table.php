@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('cart', function (Blueprint $table) {
-            if (!Schema::hasColumn('cart', 'is_processed')) {
-                $table->boolean('is_processed')->default(false);
+        Schema::table('products', function (Blueprint $table) {
+            if (!Schema::hasColumn('products', 'inventory')) {
+                $table->integer('inventory')->default(0);
             }
         });
     }
@@ -23,8 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('cart', function (Blueprint $table) {
-            $table->dropColumn('is_processed');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn('inventory');
         });
     }
 };

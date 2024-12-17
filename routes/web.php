@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemsController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderItemsController;
 
 Route::get('/', [CartController::class, 'welcome'])->name('products.welcome');
 // Routes for Cart and Cart Items
@@ -39,7 +41,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/orders', [OrderController::class, 'userOrders'])->name('user.orders');
+    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+
+    // Routes for order items
+    Route::put('/order_items/{id}', [OrderItemController::class, 'update'])->name('order-items.update');
+    Route::delete('/order_items/{id}', [OrderItemController::class, 'destroy'])->name('order-items.destroy');
 });
+
+
 
 // Include additional route files
 require __DIR__ . '/auth.php';
