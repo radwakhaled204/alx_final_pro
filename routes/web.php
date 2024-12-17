@@ -7,11 +7,11 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemsController;
 
-Route::get('/', [CartController::class, 'welcome'])->name('products.welcome');
-// Routes for Cart and Cart Items
-Route::resource('cart', CartController::class);
-Route::resource('cart-items', CartItemsController::class);
 
+// Routes for Cart and Cart Items
+Route::get('/', [CartController::class, 'showCart'])->name('welcome');
+Route::resource('cart', CartController::class)->except('showCart');
+Route::resource('cart-items', CartItemsController::class);
 // Confirm order route (GET request)
 Route::get('/confirm-order', [CartController::class, 'confirmOrder'])->name('confirm.order');
 
@@ -21,6 +21,7 @@ Route::post('/place-order', [CartController::class, 'placeOrder'])->name('order.
 
 // Route for homepage and product details
 Route::get('/', [ProductController::class, 'welcome'])->name('products.welcome');
+// Route::get('/products', [ProductController::class, 'index']);
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
 

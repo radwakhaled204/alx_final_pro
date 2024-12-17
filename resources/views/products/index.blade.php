@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 </head>
 
-<body>
+<body style="background:#F9F3EC">
 
     <!-- Navigation bar -->
     <nav>
@@ -20,14 +20,14 @@
         <div class="right-nav">
             <form method="POST" action="{{ route('admin.logout') }}">
                 @csrf
-                <button type="submit">Logout</button>
+                <button type="submit" style="color:white; background-color:#e0b178">Logout</button>
             </form>
         </div>
     </nav>
 
     <!-- Create Product button -->
     <div class="create-button">
-        <a href="{{ route('products.create') }}" class="create-btn">Create New Product</a>
+        <a href="{{ route('products.create') }}" style="background-color:#e0b178" class="create-btn">Create New Product</a>
     </div>
 
     <!-- Products Table -->

@@ -9,11 +9,35 @@ use App\Models\CartItem;
 use App\Models\Product;
 class CartController extends Controller
 {
+    // public function index()
+    // {
+    //     $cart = Cart::with('items.product')->get(); 
+    //     return view('cart.index', compact('cart'));
+    // }
     public function index()
+
     {
-        $cart = Cart::with('items.product')->get(); 
+        $cart = Cart::with('items.product')->where('user_id', auth()->id())->first();
         return view('cart.index', compact('cart'));
     }
+
+    public function showCart()
+    {
+        // Assuming you have a Cart model and it's associated with the authenticated user
+        $cart = Cart::with('items.product')->where('user_id', auth()->id())->first();
+
+        // Pass the cart data to the view
+        return view('welcome', compact('cart'));
+    }
+
+
+
+
+    // public function welcome()
+    // {
+    //     $cart = Cart::with('items.product')->get(); 
+    //     return view('welcome', compact('cart'));
+    // }
 
     public function store(Request $request)
     {

@@ -10,13 +10,20 @@ nav {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: #4CAF50;
+  background-color: #41403e;
   color: white;
   font-family: Arial, sans-serif;
 }
 
 .nav-text {
-  font-size: 30px;
+  font-size: 25px;
+  color: white;
+}
+
+.nav-text:hover {
+  background-color: #e0b279;
+  font-size: 25px;
+  color: white;
 }
 
 nav .left-nav a,
@@ -39,7 +46,7 @@ nav .right-nav button:hover {
 }
 
 .create-button .create-btn {
-  background-color: #2196F3;
+  background-color: #e0b178;
   color: white;
   padding: 10px 20px;
   text-decoration: none;
@@ -48,7 +55,7 @@ nav .right-nav button:hover {
 }
 
 .create-button .create-btn:hover {
-  background-color: #1976D2;
+  background-color: #41403e;
 }
 
 .container table {
@@ -123,7 +130,7 @@ table td {
 }
 
 table th {
-  background-color: #007bff;
+  background-color: #41403e;
   color: #fff;
 }
 
@@ -137,9 +144,9 @@ table tr:hover {
 
 .actions a,
 .actions button {
-  color: #007bff;
+  background-color: #41403e;
+  color: #ffffff;
   text-decoration: none;
-  background-color: transparent;
   border: none;
   padding: 6px 12px;
   cursor: pointer;

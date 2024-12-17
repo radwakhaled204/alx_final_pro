@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\product_image;
+use App\Models\Cart;
 
 
 
@@ -15,10 +16,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // Eager load images for each product
-        $products = Product::with('images')->get();
+        // Fetch the products from the database
+        $products = Product::all(); // or use a more specific query if needed
+
+        // Pass the products to the view
         return view('products.index', compact('products'));
     }
+
+
 
     public function welcome()
     {
