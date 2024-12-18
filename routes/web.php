@@ -10,45 +10,30 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemsController;
 
 
-// Routes for Cart and Cart Items
-Route::get('/', [CartController::class, 'showCart'])->name('welcome');
-Route::resource('cart', CartController::class)->except('showCart');
-Route::resource('cart-items', CartItemsController::class);
-// Confirm order route (GET request)
-Route::get('/confirm-order', [CartController::class, 'confirmOrder'])->name('confirm.order');
-
-// Place order route (POST request)
-Route::post('/place-order', [CartController::class, 'placeOrder'])->name('order.place');
-
-
-// Route for homepage and product details
+// Route for Homepage
 Route::get('/', [ProductController::class, 'welcome'])->name('products.welcome');
-// Route::get('/products', [ProductController::class, 'index']);
+// Route for Product Details
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 
 
-// Store cart items (protected by auth middleware)
-Route::post('/cart-items/store', [CartItemsController::class, 'store'])
-    ->middleware('auth')
-    ->name('cart-items.store');
-
-// Dashboard (protected by auth and verified middleware)
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 // Profile routes (grouped with auth middleware)
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/orders', [OrderController::class, 'userOrders'])->name('user.orders');
-    Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
-    Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+    // Route::get('/orders', [OrderController::class, 'userOrders'])->name('user.orders');
+    // Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+    // Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
 
-    // Routes for order items
-    Route::put('/order_items/{id}', [OrderItemController::class, 'update'])->name('order-items.update');
-    Route::delete('/order_items/{id}', [OrderItemController::class, 'destroy'])->name('order-items.destroy');
+    // Routes for Cart and Cart Items
+    Route::resource('cart', CartController::class)->except('showCart');
+    Route::resource('cart-items', CartItemsController::class);
+
+    // Confirm order route (GET request)
+    Route::get('/confirm-order', [CartController::class, 'confirmOrder'])->name('confirm.order');
+
+    // Place order route (POST request)
+    Route::post('/place-order', [CartController::class, 'placeOrder'])->name('order.place');
+
+    // Store cart items (protected by auth middleware)
+    Route::post('/cart-items/store', [CartItemsController::class, 'store'])->name('cart-items.store');
 });
 
 

@@ -111,8 +111,6 @@ class CartController extends Controller
             $product->inventory -= $item->quantity_to_purchase;
             $product->save();
         }
-        $totalPrice = 100;
-        Log::info($totalPrice);
         $order = Order::create([
             'user_id' => $cart->user_id,
             'total_item_price' => $cart->total_price,

@@ -109,9 +109,6 @@
               <li class="">
                 <a href="{{ route('cart.index') }}" class="mx-3">
                   <iconify-icon icon="mdi:cart" class="fs-4 position-relative"></iconify-icon>
-                  <span class="position-absolute translate-middle badge rounded-circle bg-primary pt-2">
-                    03
-                  </span>
                 </a>
               </li>
             </ul>
