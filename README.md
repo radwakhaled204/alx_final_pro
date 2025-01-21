@@ -107,6 +107,7 @@ This is a feature-rich e-commerce platform built using Laravel. The application 
 ### Technologies and Packages
 - Laravel Framework: Core of the application.
 - Blade: Templating engine for frontend.
+- Database: MySql (Phpmyadmin).
 
 
 
