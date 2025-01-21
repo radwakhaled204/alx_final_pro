@@ -79,7 +79,7 @@ This is a feature-rich e-commerce platform built using Laravel. The application 
 
 ### Accessing the App
 - **Default URL:** `http://localhost:8000`
-- **Admin Panel:** `http://localhost:8000/admin/login(login with admins in DatabaseSeeder.php and you can add another)`
+- **Admin Panel:** `http://localhost:8000/admin/login`(login with admins in DatabaseSeeder.php and you can add another)
 - Default credentials (if seeded):
   - Admin: `admin@example.com / password`
   - User: `user@example.com / password`
@@ -107,7 +107,6 @@ This is a feature-rich e-commerce platform built using Laravel. The application 
 - **Laravel Framework:** Core of the application.
 - **Blade:** Templating engine for frontend.
 - **Eloquent:** ORM for database interactions.
-- **Stripe/PayPal SDK:** For payment processing.
 - **Spatie Laravel Permissions:** Role and permission management.
 - **Livewire:** For dynamic frontend interactions (if applicable).
 
@@ -124,12 +123,3 @@ We welcome contributions to enhance this project! To contribute:
 ### Common Issues
 1. **"Class not found" errors:** Ensure you run `composer dump-autoload` after adding new classes.
 2. **Migrations fail:** Double-check your database credentials in the `.env` file.
-
-
-
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
