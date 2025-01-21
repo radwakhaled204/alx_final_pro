@@ -1,4 +1,4 @@
-# E-Commerce Laravel Project
+# Waggy Pet Shop E-Commerce Laravel Project
 
 ## Overview
 This is a feature-rich e-commerce platform built using Laravel. The application allows users to add, edit and delete items to their cart, and complete purchases through the application. Admin users can manage Category, products and orders via a dedicated admin panel. The project is designed for scalability and can serve as a foundation for building production-ready e-commerce systems.
